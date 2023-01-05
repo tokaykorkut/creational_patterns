@@ -1,34 +1,34 @@
-class Singleton {
-    private static _instance: Singleton;
+import { v4 as uuid } from "uuid";
 
-    /**
-     * The Singleton's constructor should always be private to prevent direct
-     * construction calls with the `new` operator.
-     */
-    private constructor() {}
+class LoggerService {
+    private static _instance: LoggerService;
+    private instanceId: string;
 
-    /**
-     * The static method that controls the access to the singleton instance.
-     *
-     * This implementation let you subclass the Singleton class while keeping
-     * just one instance of each subclass around.
-     */
-
-    public static getInstance(){
-        if (!Singleton._instance) {
-            Singleton._instance = new Singleton();
-        }
-        return Singleton._instance;
+    private constructor() {
+        this.instanceId = uuid();
     }
 
-    /**
-     * Project continues with rest of it's needs.
-     *                  .
-     *                  .
-     *                  .
-     *                  .
-     */
+    public static getLoggerInstance(){
+        if (!LoggerService._instance) {
+            LoggerService._instance = new LoggerService();
+            console.log(`${this._instance.instanceId} logger instance was created.`);
+        }
+        console.log(`${this._instance.instanceId} logger instance already exists.`);
+        return LoggerService._instance;
+    }
+
+    public logHttpReq() {
+        console.log(`${this.instanceId} logger instance logs request data.`);
+    }
+
+    public logHttpRes() {
+        console.log(`${this.instanceId} logger instance logs response data.`);
+    }
+
+    public logHttpErr() {
+        console.log(`${this.instanceId} logger instance logs error message.`);
+    }
 
 }
 
-export default Singleton;
+export default LoggerService;

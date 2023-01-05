@@ -1,14 +1,35 @@
-import Singleton from "./pattern";
+import LoggerService from "./pattern";
 
-function testSingletonPattern(): string {
-    const instance1 = Singleton.getInstance();
-    const instance2 = Singleton.getInstance();
+console.log("LOGGER SERVICE INSTANCES");
+const instance1 = LoggerService.getLoggerInstance();
+const instance2 = LoggerService.getLoggerInstance();
+const instance3 = LoggerService.getLoggerInstance();
+const instance4 = LoggerService.getLoggerInstance();   
+console.log("*****************************"); 
+console.log();
 
-    if (instance1 === instance2) {
-        return "Singleton works, both variables contain the same instance.";
-    }
-    return "Singleton failed, variables contain different instances.";
-}
+// * Request Logs
+console.log("REQUEST LOGS");
+instance1.logHttpReq();
+instance2.logHttpReq();
+instance3.logHttpReq();
+instance4.logHttpReq();
+console.log("*****************************");
+console.log();
 
-const result = testSingletonPattern();
-console.log(result);
+// * Response Logs
+console.log("RESPONSE LOGS");
+instance1.logHttpRes();
+instance2.logHttpRes();
+instance3.logHttpRes();
+instance4.logHttpRes();
+console.log("*****************************");
+console.log();
+
+// * Error Logs
+console.log("ERROR LOGS");
+instance1.logHttpErr();
+instance2.logHttpErr();
+instance3.logHttpErr();
+instance4.logHttpErr();
+console.log("*****************************");

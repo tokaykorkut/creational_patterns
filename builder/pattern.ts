@@ -39,19 +39,31 @@ export class BigMacBuilder implements IBurgerBuilder {
     constructor() {
         this.bigMac = new BigMac();
     }
-    addMeat(count: number): this {
+    addMeat(count = 2): this {
         this.bigMac.meat = count;
         return this;
     }
-    addCheese(count: number): this {
+    addCheese(count = 2): this {
         this.bigMac.cheese = count;
         return this;
     }
     addSauces(sauceList: SauceEnumKeys[]): this {
+        const check = sauceList.find(value => value === SauceEnum.MAGIC_SAUCE_BIG_MAC);
+        if (!check) {
+            sauceList.push(SauceEnum.MAGIC_SAUCE_BIG_MAC);
+        }
         this.bigMac.sauceList = sauceList;
         return this;
     }
     addVegetables(vegeList: VegetableEnumKeys[]): this {
+        const checkLettuce = vegeList.find(value => value === VegetableEnum.LETTUCE);
+        if (!checkLettuce) {
+            vegeList.push(VegetableEnum.LETTUCE);
+        }
+        const checkOnion = vegeList.find(value => value === VegetableEnum.ONION);
+        if (!checkOnion) {
+            vegeList.push(VegetableEnum.ONION);
+        }
         this.bigMac.vegeList = vegeList;
         return this;
     }
@@ -75,19 +87,27 @@ export class CheeseBurgerBuilder implements IBurgerBuilder {
     constructor() {
         this.cheeseBurger = new CheeseBurger();
     }
-    addMeat(count: number): this {
+    addMeat(count = 1): this {
         this.cheeseBurger.meat = count;
         return this;
     }
-    addCheese(count: number): this {
+    addCheese(count = 1): this {
         this.cheeseBurger.cheese = count;
         return this;
     }
     addSauces(sauceList: SauceEnumKeys[]): this {
+        const check = sauceList.find(value => value === SauceEnum.KETCHUP);
+        if (!check) {
+            sauceList.push(SauceEnum.KETCHUP);
+        }
         this.cheeseBurger.sauceList = sauceList;
         return this;
     }
     addVegetables(vegeList: VegetableEnumKeys[]): this {
+        const checkOnion = vegeList.find(value => value === VegetableEnum.ONION);
+        if (!checkOnion) {
+            vegeList.push(VegetableEnum.ONION);
+        }
         this.cheeseBurger.vegeList = vegeList;
         return this;
     }
@@ -106,21 +126,21 @@ export class CheeseBurgerBuilder implements IBurgerBuilder {
 }
 
 class BigMac {
-    public meat!: number;
-    public cheese = 0;
+    public meat = 2;
+    public cheese = 2;
     public sauceList!: SauceEnumKeys[];
     public vegeList!: VegetableEnumKeys[];
-    public pickle = false;
+    public pickle = true;
     public ingredientList!: ExtraIngredientEnumKeys[];
 
 }
 
 class CheeseBurger {
-    public meat!: number;
-    public cheese = 0;
+    public meat = 1;
+    public cheese = 1;
     public sauceList!: SauceEnumKeys[];
     public vegeList!: VegetableEnumKeys[];
-    public pickle = false;
+    public pickle = true;
     public ingredientList!: ExtraIngredientEnumKeys[];
 
 }
